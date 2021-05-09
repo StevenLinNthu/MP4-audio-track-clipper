@@ -1,4 +1,5 @@
 from moviepy.editor import *
+import argparse
 
 
 def extract_songs(source, songs):
@@ -31,6 +32,10 @@ def generate_songs_duration(fn='./song_list.txt'):
         
 
 if __name__ == '__main__':
-    source = AudioFileClip("./sample.mp4")
-    songs = koko_arare_live()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--source", type=str, help="Source file.")
+    args = parser.parse_args()
+
+    source = AudioFileClip(args.source)
+    songs = generate_songs_duration()
     extract_songs(source, songs)
